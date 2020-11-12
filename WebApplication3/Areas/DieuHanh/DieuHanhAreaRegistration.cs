@@ -19,6 +19,7 @@ namespace WebApplication3.Areas.DieuHanh
                 "DieuHanh/{controller}/{action}/{id}",
                 new { action = "Login", id = UrlParameter.Optional }
             );
+           
         }
     }
 }

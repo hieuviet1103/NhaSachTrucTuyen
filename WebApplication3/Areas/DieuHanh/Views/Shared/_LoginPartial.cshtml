@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication3.Areas.DieuHanh.Models;
+@if (LoginSatus.IsloginAdmin == true)
+{
+    using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + LoginSatus.UserLogin + "!", "Index", "Login", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li>
+            @Html.ActionLink("Đăng xuất", "Logout", "Login", routeValues: null, htmlAttributes: new { status = "Logout" })
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Đăng nhập", "Login", "Login", routeValues: null, htmlAttributes: new { id = "logout" })</li>
+    </ul>
+}
+

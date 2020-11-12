@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GroceryHomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_LoaiSanPham">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoaiSP" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSP" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LoaiSP" Type="int" Nullable="false" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Hinh" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_SanPham">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSP" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LoaiSP" Type="int" Nullable="false" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Hinh" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tbl_User">
+    <Key>
+      <PropertyRef Name="User_Name" />
+    </Key>
+    <Property Name="User_Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Password" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="ChucVu" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_tbl_SanPham_tbl_LoaiSanPham">
+    <End Role="tbl_LoaiSanPham" Type="Self.tbl_LoaiSanPham" Multiplicity="1" />
+    <End Role="tbl_SanPham" Type="Self.tbl_SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_LoaiSanPham">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_SanPham">
+        <PropertyRef Name="LoaiSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GroceryHomeModelStoreContainer">
+    <EntitySet Name="tbl_LoaiSanPham" EntityType="Self.tbl_LoaiSanPham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Product" EntityType="Self.tbl_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SanPham" EntityType="Self.tbl_SanPham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_SanPham_tbl_LoaiSanPham" Association="Self.FK_tbl_SanPham_tbl_LoaiSanPham">
+      <End Role="tbl_LoaiSanPham" EntitySet="tbl_LoaiSanPham" />
+      <End Role="tbl_SanPham" EntitySet="tbl_SanPham" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
